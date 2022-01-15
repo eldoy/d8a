@@ -1,0 +1,18 @@
+{
+  "name": "d8a",
+  "version": "0.1.0",
+  "description": "Data validation library",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eldoy/d8a"
+  },
+  "author": "Vidar Eldøy <vidar@eldoy.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^27.4.7"
+  }
+}
