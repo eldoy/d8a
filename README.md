@@ -130,6 +130,7 @@ const myLocales = {
 function translate(key, ...args) {
   return myLocales[key] || key
 }
+
 let spec = {}, data = {}
 const error = await validate(spec, data, { t: translate })
 ```
