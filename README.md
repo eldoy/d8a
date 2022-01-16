@@ -58,8 +58,8 @@ async function extension({
   spec,
   type,
   validator,
-  name,
-  value
+  a, // value of validation
+  b  // value of data
 }) {
   // Example:
   if (type == 'unique) {
