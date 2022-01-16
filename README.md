@@ -2,13 +2,13 @@
 
 Data validation library.
 
-### Usage
+### Install
 
 ```sh
 npm i d8a
 ```
 
-#### Validate
+### Validate
 ```js
 const { validate } = require('d8a')
 
@@ -29,7 +29,7 @@ if (error === null) {
 }
 ```
 
-#### Options
+### Options
 The third parameter to the `validate` function are the options:
 ```js
 validation({}, {}, {
@@ -42,7 +42,7 @@ validation({}, {}, {
 })
 ```
 
-#### Extension function
+### Extension function
 You can extend the validations with your own validator functions:
 ```js
 
@@ -74,7 +74,7 @@ const error = await validate({}, {}, extension)
 const error = await validate({}, {}, { lang: 'no' }, extension)
 ```
 
-#### Locales
+### Locales
 The default locales are found here:
 
 ```js
