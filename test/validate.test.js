@@ -1002,4 +1002,21 @@ describe('validate', () => {
     error = await validate(spec, data, $)
     expect(error).toBeNull()
   })
+
+  // Test callback extension
+  it('should support callback extension', async () => {
+    let spec = {
+      val: {
+        unique: true
+      }
+    }
+    let data = { val: 'string' }
+    async function ext({ type, field, add }) {
+      if (type == 'unique') {
+        add(field, 'must be unique')
+      }
+    }
+    error = await validate(spec, data, ext)
+    expect(error.val).toEqual(['must be unique'])
+  })
 })
