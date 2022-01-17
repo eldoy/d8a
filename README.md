@@ -8,7 +8,48 @@ Data validation library.
 npm i d8a
 ```
 
+### Spec
+
+These are the available validations:
+```js
+// Run validations on specified fields
+name: {
+  required: true,  // this means can not be undefined
+  eq: 5,           // Equal to
+  ne: 5,           // Not equal to
+  gt: 5,           // Greater than
+  lt: 5,           // Less than
+  gte: 5,          // Greater than or equal to
+  lte: 5,          // Less than or equal to
+  in: [1, 2, 3],   // Must be in list
+  nin: [1, 2, 3],  // Must not be in list
+  length: 5,       // Length of string must be
+  minlength: 5,    // Minimum length of string
+  maxlength: 5,    // Maximum length of string
+  match: /regex/,  // Must match regex
+  matcher: async function(val, $) {
+    // Validation fails on truthy value
+    if (!val) {
+      return $.t('some_error')
+    }
+    // Return nothing or undefined to pass
+  },
+  is: 'boolean',  // Must be true or false
+  is: 'string',   // Must be a string
+  is: 'number',   // Must be a number, integer or decimal (float)
+  is: 'integer',  // Must be an integer
+  is: 'decimal',  // Must be a decimal number
+  is: 'date',     // Must be a date
+  is: 'id',       // Must be an id
+  is: 'object',   // Must be an object
+  is: 'array',    // Must an array
+  is: 'email',    // Must be an email address
+  is: 'url'       // Must be a URL
+}
+```
+
 ### Validate
+
 ```js
 const { validate } = require('d8a')
 
@@ -17,15 +58,18 @@ let spec = {
     required: true
   }
 }
-let data = {}
+let data = {
+  val: 'hello'
+}
 let opt = {}
 let error = await validate(spec, data, opt)
 
+// Returns null if no errors found
 if (error === null) {
   console.log('No errors')
 } else {
   console.log(error.val)
-  // Prints: ['is required'])
+  // Prints: ['is required']) if val is not defined
 }
 ```
 
