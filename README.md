@@ -12,10 +12,10 @@ npm i d8a
 
 These are the built in validations:
 ```js
-// Run validations on specified fields
+// Run validations on specified fields, here 'name'
 {
   name: {
-    required: true,  // this means can not be undefined
+    required: true,  // Value must be defined
     eq: 5,           // Equal to
     ne: 5,           // Not equal to
     gt: 5,           // Greater than
