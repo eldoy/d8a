@@ -12,7 +12,7 @@ npm i d8a
 
 These are the built in validations:
 ```js
-// Run validations on specified fields, here 'name'
+// Write a spec with specified fields, here for 'name'
 {
   name: {
     required: true,  // Value must be defined
