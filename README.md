@@ -10,7 +10,7 @@ npm i d8a
 
 ### Spec
 
-These are the available validations:
+These are the built in validations:
 ```js
 // Run validations on specified fields
 {
