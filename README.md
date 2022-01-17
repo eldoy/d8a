@@ -28,7 +28,7 @@ These are the available validations:
     minlength: 5,    // Minimum length of string
     maxlength: 5,    // Maximum length of string
     match: /regex/,  // Must match regex
-    matcher: async function(val, $) {
+    matcher: async function(val, opt) {
       // Validation fails on truthy value
       if (!val) {
         return 'val is not found'
