@@ -104,6 +104,20 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
+  // Test eq for integers
+  it('should do eq for arrays', async () => {
+    let schema = 1
+    data = 2
+
+    let error = await validate(schema, data, opt)
+    expect(error.val).toEqual(['must be equal to 1'])
+
+    data = 1
+    error = await validate(schema, data, opt)
+
+    expect(error).toBeNull()
+  })
+
   // Test ne
   it('should not be equal to x', async () => {
     let schema = {
