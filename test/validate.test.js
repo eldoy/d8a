@@ -78,6 +78,32 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
+  // Test eq for objects
+  it('should do eq for objects', async () => {
+    let schema = {
+      val: { a: 1, b: { c: 2 } }
+    }
+
+    data = {
+      val: { a: 1, b: { c: 2 } }
+    }
+    error = await validate(schema, data, opt)
+    expect(error).toBeNull()
+  })
+
+  // Test eq for arrays
+  it('should do eq for arrays', async () => {
+    let schema = {
+      val: [1, 2, 3]
+    }
+
+    data = {
+      val: [1, 2, 3]
+    }
+    error = await validate(schema, data, opt)
+    expect(error).toBeNull()
+  })
+
   // Test ne
   it('should not be equal to x', async () => {
     let schema = {
