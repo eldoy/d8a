@@ -84,7 +84,16 @@ validation({}, {}, {
   lang: 'en',
 
   // Custom translate function
-  t: async function(key, ...args) {}
+  t: async function(key, ...args) {},
+
+  // Custom locales, example
+  locales: {
+    en: {
+      validation: {
+        unique: 'must be unique'
+      }
+    }
+  }
 })
 ```
 
