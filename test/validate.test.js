@@ -60,6 +60,24 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
+  // Test eq as default
+  it('should have eq as default', async () => {
+    let schema = {
+      val: 6
+    }
+    let data = {
+      val: 4
+    }
+    let error = await validate(schema, data, $)
+    expect(error.val).toEqual(['must be equal to 6'])
+
+    data = {
+      val: 6
+    }
+    error = await validate(schema, data, $)
+    expect(error).toBeNull()
+  })
+
   // Test ne
   it('should not be equal to x', async () => {
     let schema = {
