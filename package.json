@@ -14,5 +14,9 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^27.4.7"
+  },
+  "dependencies": {
+    "extras": "^0.8.1",
+    "lodash": "^4.17.21"
   }
 }
