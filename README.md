@@ -16,7 +16,7 @@ These are the built in validations:
 {
   name: {
     required: true,  // Value must be defined
-    eq: 5,           // Equal to
+    eq: 5,           // Equal to, default
     ne: 5,           // Not equal to
     gt: 5,           // Greater than
     lt: 5,           // Less than
@@ -91,8 +91,8 @@ validation({}, {}, {
 ### Extension function
 You can extend the validations with your own validator functions:
 ```js
-
-async function extension({
+// Write a validator function
+async function unique({
   spec,
   data,
   opt,
@@ -108,16 +108,19 @@ async function extension({
   b  // value of data
 }) {
   // Example:
-  if (type == 'unique) {
-    add(field, 'must be unique')
+  add(field, 'must be unique')
+}
+
+// Create ext object for option
+const ext = {
+  unique: {
+    type: 'bool', // The accepted value type for this function
+    fn: unique
   }
 }
 
-// Pass function as last parameter
-const error = await validate({}, {}, extension)
-
-// With options
-const error = await validate({}, {}, { lang: 'no' }, extension)
+// Pass ext option
+const error = await validate({}, {}, { ext })
 ```
 
 ### Locales

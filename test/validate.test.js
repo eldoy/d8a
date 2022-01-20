@@ -1029,12 +1029,17 @@ describe('validate', () => {
       }
     }
     let data = { val: 'string' }
-    async function ext({ type, field, add }) {
-      if (type == 'unique') {
-        add(field, 'must be unique')
+
+    const ext = {
+      unique: {
+        type: 'bool',
+        fn: async function({ field, add }) {
+          add(field, 'must be unique')
+        }
       }
     }
-    error = await validate(spec, data, ext)
+
+    error = await validate(spec, data, { ext })
     expect(error.val).toEqual(['must be unique'])
   })
 })
