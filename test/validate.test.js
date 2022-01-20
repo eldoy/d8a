@@ -976,6 +976,22 @@ describe('validate', () => {
     expect(error.street.name).toEqual(['maximum length is 5'])
   })
 
+  // Test deeply nested values with array
+  it('should validate nested values with array', async () => {
+    let schema = {
+      'cars.name[0]': {
+        eq: 'cart'
+      }
+    }
+    let data = {
+      cars: {
+        name: ['cart']
+      }
+    }
+    error = await validate(schema, data, opt)
+    expect(error).toBeNull()
+  })
+
   // Test required with other
   it('should show either require or minlength', async () => {
     let spec = {
