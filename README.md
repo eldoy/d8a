@@ -78,7 +78,7 @@ if (error === null) {
 ### Options
 The third parameter to the `validate` function are the options:
 ```js
-validation({}, {}, {
+validate({}, {}, {
 
   // Language used for locales
   lang: 'en',
