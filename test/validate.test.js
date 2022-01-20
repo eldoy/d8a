@@ -1,6 +1,6 @@
 const { validate, locales } = require('../index.js')
 
-const $ = {}
+const opt = {}
 
 /** Testing validate functions */
 
@@ -14,11 +14,11 @@ describe('validate', () => {
       }
     }
     let data = {}
-    let error = await validate(spec, data, $)
+    let error = await validate(spec, data, opt)
     expect(error.val).toEqual(['is required'])
 
     data = { val: 'hello' }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error).toBeNull()
   })
 
@@ -26,17 +26,17 @@ describe('validate', () => {
   it('should require a value to be set as a function', async () => {
     let spec = {
       val: {
-        required: async function(val, $) {
+        required: async function(val, opt) {
           return true
         }
       }
     }
     let data = {}
-    let error = await validate(spec, data, $)
+    let error = await validate(spec, data, opt)
     expect(error.val).toEqual(['is required'])
 
     data = { val: 'hello' }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error).toBeNull()
   })
 
@@ -50,13 +50,13 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be equal to 6'])
 
     data = {
       val: 6
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -68,13 +68,13 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be equal to 6'])
 
     data = {
       val: 6
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -88,13 +88,13 @@ describe('validate', () => {
     let data = {
       val: 6
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must not be equal to 6'])
 
     data = {
       val: 4
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -108,19 +108,19 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be greater than 4'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be greater than 4'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -134,19 +134,19 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be less than 3'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be less than 3'])
 
     data = {
       val: 2
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -160,25 +160,25 @@ describe('validate', () => {
     let data = {
       val: 2
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be greater than or equal to 3'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be greater than or equal to 3'])
 
     data = {
       val: 3
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 4
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -192,25 +192,25 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be less than or equal to 3'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be less than or equal to 3'])
 
     data = {
       val: 3
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 2
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -224,19 +224,19 @@ describe('validate', () => {
     let data = {
       val: 5
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 6
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 7
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be one of 5, 6'])
   })
 
@@ -250,19 +250,19 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 7
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must not be one of 5, 6'])
   })
 
@@ -276,37 +276,37 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
       val: new Date()
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
       val: {}
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
       val: 'regex'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -324,18 +324,18 @@ describe('validate', () => {
     let data = {
       val: 5
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['can not be 5'])
 
     data = {
       val: 4
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {}
 
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -350,37 +350,37 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
       val: new Date()
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
       val: 'hey'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
       val: {}
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
       val: 'hello'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -395,36 +395,36 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['minimum length is 5'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['minimum length is 5'])
 
     data = {
       val: new Date()
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['minimum length is 5'])
 
     data = {
       val: 'hey'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['minimum length is 5'])
     data = {
       val: {}
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['minimum length is 5'])
 
     data = {
       val: 'hello'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -438,40 +438,40 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['maximum length is 5'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['maximum length is 5'])
 
     data = {
       val: new Date()
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['maximum length is 5'])
 
     data = {
       val: 'hey'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
     data = {
       val: {}
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['maximum length is 5'])
 
     data = {
       val: 'hello!'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['maximum length is 5'])
   })
 
-  // Test is: $boolean
+  // Test is: optboolean
   it('should be boolean', async () => {
     let schema = {
       val: {
@@ -481,35 +481,35 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be true or false'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be true or false'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be true or false'])
 
     data = {
       val: true
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: false
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
-  // Test is: $string
+  // Test is: optstring
   it('should be string', async () => {
     let schema = {
       val: {
@@ -519,35 +519,35 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a string'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a string'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: true
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a string'])
 
     data = {
       val: false
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a string'])
   })
 
-  // Test is: $number
+  // Test is: optnumber
   it('should be number', async () => {
     let schema = {
       val: {
@@ -557,41 +557,41 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a number'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 5.3
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a number'])
 
     data = {
       val: true
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a number'])
 
     data = {
       val: false
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a number'])
   })
 
-  // Test is: $integer
+  // Test is: optinteger
   it('should be an integer', async () => {
     let schema = {
       val: {
@@ -601,41 +601,41 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an integer'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 5.3
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an integer'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an integer'])
 
     data = {
       val: true
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an integer'])
 
     data = {
       val: false
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an integer'])
   })
 
-  // Test is: $decimal
+  // Test is: optdecimal
   it('should be decimal', async () => {
     let schema = {
       val: {
@@ -645,41 +645,41 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a decimal'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a decimal'])
 
     data = {
       val: 5.3
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a decimal'])
 
     data = {
       val: true
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a decimal'])
 
     data = {
       val: false
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a decimal'])
   })
 
-  // Test is: $date
+  // Test is: optdate
   it('should be date', async () => {
     let schema = {
       val: {
@@ -689,41 +689,41 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a date'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a date'])
 
     data = {
       val: new Date()
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a date'])
 
     data = {
       val: true
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a date'])
 
     data = {
       val: false
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a date'])
   })
 
-  // Test is: $id
+  // Test is: optid
   it('should be id', async () => {
     let schema = {
       val: {
@@ -733,41 +733,41 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an id'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an id'])
 
     data = {
       val: new Date()
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an id'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an id'])
 
     data = {
       val: '507f1f77bcf86cd799439011'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
 
     data = {
       val: 'ck2m9iwoo0001akps7f5fh8we'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
-  // Test is: $object
+  // Test is: optobject
   it('should be object', async () => {
     let schema = {
       val: {
@@ -777,35 +777,35 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an object'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an object'])
 
     data = {
       val: new Date()
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an object'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an object'])
 
     data = {
       val: {}
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
-  // Test is: $array
+  // Test is: optarray
   it('should be array', async () => {
     let schema = {
       val: {
@@ -815,40 +815,40 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an array'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an array'])
 
     data = {
       val: new Date()
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an array'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an array'])
     data = {
       val: {}
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an array'])
 
     data = {
       val: []
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
-  // Test is: $email
+  // Test is: optemail
   it('should be email', async () => {
     let schema = {
       val: {
@@ -858,40 +858,40 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an email'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an email'])
 
     data = {
       val: new Date()
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an email'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an email'])
     data = {
       val: {}
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be an email'])
 
     data = {
       val: 'mail@example.com'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
-  // Test is: $url
+  // Test is: opturl
   it('should be url', async () => {
     let schema = {
       val: {
@@ -901,36 +901,36 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a URL'])
 
     data = {
       val: 5
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a URL'])
 
     data = {
       val: new Date()
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a URL'])
 
     data = {
       val: 'string'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a URL'])
     data = {
       val: {}
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error.val).toEqual(['must be a URL'])
 
     data = {
       val: 'http://example.com'
     }
-    error = await validate(schema, data, $)
+    error = await validate(schema, data, opt)
     expect(error).toBeNull()
   })
 
@@ -946,7 +946,7 @@ describe('validate', () => {
         name: 'hello!'
       }
     }
-    let error = await validate(schema, data, $)
+    let error = await validate(schema, data, opt)
     expect(error.street.name).toEqual(['maximum length is 5'])
   })
 
@@ -959,23 +959,23 @@ describe('validate', () => {
       }
     }
     let data = {}
-    let error = await validate(spec, data, $)
+    let error = await validate(spec, data, opt)
     expect(error.val).toEqual(['is required'])
 
     data = { val: 'h' }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error.val).toEqual(['minimum length is 2'])
 
     data = { val: 'hello' }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error).toBeNull()
 
     data = { val: null }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error.val).toEqual(['minimum length is 2'])
 
     data = { val: new Date() }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error.val).toEqual(['minimum length is 2'])
   })
 
@@ -988,15 +988,15 @@ describe('validate', () => {
       }
     }
     let data = { val: 1 }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be greater than 2'])
 
     data = { val: 6 }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be less than 5'])
 
     data = { val: 3 }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error).toBeNull()
   })
 
@@ -1009,15 +1009,15 @@ describe('validate', () => {
       }
     }
     let data = { val: 'string' }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be an integer', 'must be equal to 5'])
 
     data = { val: 6 }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be equal to 5'])
 
     data = { val: 5 }
-    error = await validate(spec, data, $)
+    error = await validate(spec, data, opt)
     expect(error).toBeNull()
   })
 
