@@ -110,11 +110,9 @@ async function unique({
   errors,
   add,
   field,
-  spec,
   type,
-  validator,
-  a, // value of validation
-  b  // value of data
+  want, // the value we want
+  got   // the value of the data
 }) {
   // Example:
   add(field, 'must be unique')
