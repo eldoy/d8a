@@ -25,8 +25,8 @@ These are the built in validations:
     in: [1, 2, 3],   // Must be in list
     nin: [1, 2, 3],  // Must not be in list
     length: 5,       // Length of string must be
-    min: 5,    // Minimum length of string
-    max: 5,    // Maximum length of string
+    min: 5,          // Minimum length of string
+    max: 5,          // Maximum length of string
     match: /regex/,  // Must match regex
     matcher: async function(val, opt) {
       // Validation fails on truthy value
