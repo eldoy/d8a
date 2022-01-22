@@ -424,11 +424,11 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
-  // Test minlength
+  // Test min
   it('should have a min length', async () => {
     let spec = {
       val: {
-        minlength: 5
+        min: 5
       }
     }
 
@@ -468,11 +468,11 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
-  // Test maxlength
+  // Test max
   it('should have a max length', async () => {
     let spec = {
       val: {
-        maxlength: 5
+        max: 5
       }
     }
     let data = {
@@ -978,7 +978,7 @@ describe('validate', () => {
   it('should validate deeply nested values', async () => {
     let spec = {
       'street.name': {
-        maxlength: 5
+        max: 5
       }
     }
     let data = {
@@ -1007,11 +1007,11 @@ describe('validate', () => {
   })
 
   // Test required with other
-  it('should show either require or minlength', async () => {
+  it('should show either require or min', async () => {
     let spec = {
       val: {
         required: true,
-        minlength: 2
+        min: 2
       }
     }
     let data = {}

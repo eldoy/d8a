@@ -25,8 +25,8 @@ These are the built in validations:
     in: [1, 2, 3],   // Must be in list
     nin: [1, 2, 3],  // Must not be in list
     length: 5,       // Length of string must be
-    minlength: 5,    // Minimum length of string
-    maxlength: 5,    // Maximum length of string
+    min: 5,    // Minimum length of string
+    max: 5,    // Maximum length of string
     match: /regex/,  // Must match regex
     matcher: async function(val, opt) {
       // Validation fails on truthy value
@@ -153,8 +153,8 @@ They look like this:
       in: 'must be one of %s',
       nin: 'must not be one of %s',
       length: 'length must be %s',
-      minlength: 'minimum length is %s',
-      maxlength: 'maximum length is %s',
+      min: 'minimum length is %s',
+      max: 'maximum length is %s',
       boolean: 'must be true or false',
       string: 'must be a string',
       number: 'must be a number',
