@@ -45,6 +45,7 @@ These are the built in validations:
     is: 'object',   // Must be an object
     is: 'array',    // Must an array
     is: 'email',    // Must be an email address
+    is: 'undefined' // Must be undefined
     is: 'url'       // Must be a URL
   }
 }
