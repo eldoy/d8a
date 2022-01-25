@@ -993,6 +993,36 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
+  // Test is: undefined
+  it('should be undefined', async () => {
+    let spec = {
+      val: {
+        is: 'undefined'
+      }
+    }
+    let data = {
+      val: undefined
+    }
+    let error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {}
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {
+      val: 1
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be undefined'])
+
+    data = {
+      val: null
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be undefined'])
+  })
+
   // Test deeply nested values
   it('should validate deeply nested values', async () => {
     let spec = {
