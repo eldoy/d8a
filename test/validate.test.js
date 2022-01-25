@@ -511,7 +511,7 @@ describe('validate', () => {
     expect(error.val).toEqual(['maximum length is 5'])
   })
 
-  // Test is: optboolean
+  // Test is: boolean
   it('should be boolean', async () => {
     let spec = {
       val: {
@@ -549,7 +549,7 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
-  // Test is: optstring
+  // Test is: string
   it('should be string', async () => {
     let spec = {
       val: {
@@ -587,7 +587,7 @@ describe('validate', () => {
     expect(error.val).toEqual(['must be a string'])
   })
 
-  // Test is: optnumber
+  // Test is: number
   it('should be number', async () => {
     let spec = {
       val: {
@@ -631,7 +631,7 @@ describe('validate', () => {
     expect(error.val).toEqual(['must be a number'])
   })
 
-  // Test is: optinteger
+  // Test is: integer
   it('should be an integer', async () => {
     let spec = {
       val: {
@@ -675,7 +675,7 @@ describe('validate', () => {
     expect(error.val).toEqual(['must be an integer'])
   })
 
-  // Test is: optdecimal
+  // Test is: decimal
   it('should be decimal', async () => {
     let spec = {
       val: {
@@ -719,7 +719,7 @@ describe('validate', () => {
     expect(error.val).toEqual(['must be a decimal'])
   })
 
-  // Test is: optdate
+  // Test is: date
   it('should be date', async () => {
     let spec = {
       val: {
@@ -763,7 +763,7 @@ describe('validate', () => {
     expect(error.val).toEqual(['must be a date'])
   })
 
-  // Test is: optid
+  // Test is: id
   it('should be id', async () => {
     let spec = {
       val: {
@@ -807,7 +807,7 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
-  // Test is: optobject
+  // Test is: object
   it('should be object', async () => {
     let spec = {
       val: {
@@ -845,7 +845,7 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
-  // Test is: optarray
+  // Test is: array
   it('should be array', async () => {
     let spec = {
       val: {
@@ -888,7 +888,7 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
-  // Test is: optemail
+  // Test is: email
   it('should be email', async () => {
     let spec = {
       val: {
@@ -931,7 +931,7 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
-  // Test is: opturl
+  // Test is: url
   it('should be url', async () => {
     let spec = {
       val: {
