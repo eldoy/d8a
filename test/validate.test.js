@@ -1,8 +1,6 @@
-const { validate, locales } = require('../index.js')
+const d8a = require('../index.js')
 
-const opt = {}
-
-/** Testing validate functions */
+/** Testing validate function */
 
 describe('validate', () => {
 
@@ -14,11 +12,11 @@ describe('validate', () => {
       }
     }
     let data = {}
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['is required'])
 
     data = { val: 'hello' }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -32,11 +30,11 @@ describe('validate', () => {
       }
     }
     let data = {}
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['is required'])
 
     data = { val: 'hello' }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -50,13 +48,13 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be equal to 6'])
 
     data = {
       val: 6
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -68,13 +66,13 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be equal to 6'])
 
     data = {
       val: 6
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -87,7 +85,7 @@ describe('validate', () => {
     data = {
       val: { a: 1, b: { c: 2 } }
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -100,7 +98,7 @@ describe('validate', () => {
     data = {
       val: [1, 2, 3]
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -109,11 +107,11 @@ describe('validate', () => {
     let spec = 1
     data = 2
 
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be equal to 1'])
 
     data = 1
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
 
     expect(error).toBeNull()
   })
@@ -128,13 +126,13 @@ describe('validate', () => {
     let data = {
       val: 6
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must not be equal to 6'])
 
     data = {
       val: 4
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -148,19 +146,19 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be greater than 4'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be greater than 4'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -174,19 +172,19 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be less than 3'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be less than 3'])
 
     data = {
       val: 2
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -200,25 +198,25 @@ describe('validate', () => {
     let data = {
       val: 2
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be greater than or equal to 3'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be greater than or equal to 3'])
 
     data = {
       val: 3
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 4
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -232,25 +230,25 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be less than or equal to 3'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be less than or equal to 3'])
 
     data = {
       val: 3
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 2
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -264,19 +262,19 @@ describe('validate', () => {
     let data = {
       val: 5
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 6
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 7
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be one of 5, 6'])
   })
 
@@ -290,19 +288,19 @@ describe('validate', () => {
     let data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 7
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must not be one of 5, 6'])
   })
 
@@ -316,37 +314,37 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
       val: new Date()
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
       val: {}
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
       val: 'regex'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -364,18 +362,18 @@ describe('validate', () => {
     let data = {
       val: 5
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['can not be 5'])
 
     data = {
       val: 4
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {}
 
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -390,37 +388,37 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
       val: new Date()
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
       val: 'hey'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
       val: {}
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
       val: 'hello'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -435,36 +433,36 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['minimum length is 5'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['minimum length is 5'])
 
     data = {
       val: new Date()
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['minimum length is 5'])
 
     data = {
       val: 'hey'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['minimum length is 5'])
     data = {
       val: {}
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['minimum length is 5'])
 
     data = {
       val: 'hello'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -478,40 +476,40 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['maximum length is 5'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['maximum length is 5'])
 
     data = {
       val: new Date()
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['maximum length is 5'])
 
     data = {
       val: 'hey'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
     data = {
       val: {}
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['maximum length is 5'])
 
     data = {
       val: 'hello!'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['maximum length is 5'])
   })
 
-  // Test is: optboolean
+  // Test is: boolean
   it('should be boolean', async () => {
     let spec = {
       val: {
@@ -521,35 +519,35 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be true or false'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be true or false'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be true or false'])
 
     data = {
       val: true
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: false
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
-  // Test is: optstring
+  // Test is: string
   it('should be string', async () => {
     let spec = {
       val: {
@@ -559,35 +557,35 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a string'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a string'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: true
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a string'])
 
     data = {
       val: false
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a string'])
   })
 
-  // Test is: optnumber
+  // Test is: number
   it('should be number', async () => {
     let spec = {
       val: {
@@ -597,41 +595,41 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a number'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 5.3
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a number'])
 
     data = {
       val: true
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a number'])
 
     data = {
       val: false
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a number'])
   })
 
-  // Test is: optinteger
+  // Test is: integer
   it('should be an integer', async () => {
     let spec = {
       val: {
@@ -641,41 +639,41 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an integer'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 5.3
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an integer'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an integer'])
 
     data = {
       val: true
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an integer'])
 
     data = {
       val: false
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an integer'])
   })
 
-  // Test is: optdecimal
+  // Test is: decimal
   it('should be decimal', async () => {
     let spec = {
       val: {
@@ -685,41 +683,41 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a decimal'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a decimal'])
 
     data = {
       val: 5.3
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a decimal'])
 
     data = {
       val: true
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a decimal'])
 
     data = {
       val: false
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a decimal'])
   })
 
-  // Test is: optdate
+  // Test is: date
   it('should be date', async () => {
     let spec = {
       val: {
@@ -729,41 +727,41 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a date'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a date'])
 
     data = {
       val: new Date()
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a date'])
 
     data = {
       val: true
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a date'])
 
     data = {
       val: false
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a date'])
   })
 
-  // Test is: optid
+  // Test is: id
   it('should be id', async () => {
     let spec = {
       val: {
@@ -773,41 +771,41 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an id'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an id'])
 
     data = {
       val: new Date()
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an id'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an id'])
 
     data = {
       val: '507f1f77bcf86cd799439011'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = {
       val: 'ck2m9iwoo0001akps7f5fh8we'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
-  // Test is: optobject
+  // Test is: object
   it('should be object', async () => {
     let spec = {
       val: {
@@ -817,35 +815,35 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an object'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an object'])
 
     data = {
       val: new Date()
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an object'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an object'])
 
     data = {
       val: {}
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
-  // Test is: optarray
+  // Test is: array
   it('should be array', async () => {
     let spec = {
       val: {
@@ -855,40 +853,40 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an array'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an array'])
 
     data = {
       val: new Date()
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an array'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an array'])
     data = {
       val: {}
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an array'])
 
     data = {
       val: []
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
-  // Test is: optemail
+  // Test is: email
   it('should be email', async () => {
     let spec = {
       val: {
@@ -898,40 +896,40 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an email'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an email'])
 
     data = {
       val: new Date()
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an email'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an email'])
     data = {
       val: {}
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an email'])
 
     data = {
       val: 'mail@example.com'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
-  // Test is: opturl
+  // Test is: url
   it('should be url', async () => {
     let spec = {
       val: {
@@ -941,36 +939,36 @@ describe('validate', () => {
     let data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a URL'])
 
     data = {
       val: 5
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a URL'])
 
     data = {
       val: new Date()
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a URL'])
 
     data = {
       val: 'string'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a URL'])
     data = {
       val: {}
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be a URL'])
 
     data = {
       val: 'http://example.com'
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -986,7 +984,7 @@ describe('validate', () => {
         name: 'hello!'
       }
     }
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.street.name).toEqual(['maximum length is 5'])
   })
 
@@ -1002,7 +1000,7 @@ describe('validate', () => {
         name: ['cart']
       }
     }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -1015,23 +1013,23 @@ describe('validate', () => {
       }
     }
     let data = {}
-    let error = await validate(spec, data, opt)
+    let error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['is required'])
 
     data = { val: 'h' }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['minimum length is 2'])
 
     data = { val: 'hello' }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
 
     data = { val: null }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['minimum length is 2'])
 
     data = { val: new Date() }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['minimum length is 2'])
   })
 
@@ -1044,15 +1042,15 @@ describe('validate', () => {
       }
     }
     let data = { val: 1 }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be greater than 2'])
 
     data = { val: 6 }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be less than 5'])
 
     data = { val: 3 }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -1065,15 +1063,15 @@ describe('validate', () => {
       }
     }
     let data = { val: 'string' }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be an integer', 'must be equal to 5'])
 
     data = { val: 6 }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error.val).toEqual(['must be equal to 5'])
 
     data = { val: 5 }
-    error = await validate(spec, data, opt)
+    error = await d8a().validate(spec, data)
     expect(error).toBeNull()
   })
 
@@ -1095,7 +1093,7 @@ describe('validate', () => {
       }
     }
 
-    error = await validate(spec, data, { ext })
+    error = await d8a({ ext }).validate(spec, data)
     expect(error.val).toEqual(['must be unique'])
   })
 
@@ -1125,7 +1123,7 @@ describe('validate', () => {
       }
     }
 
-    error = await validate(spec, data, { ext, locales })
+    error = await d8a({ ext, locales }).validate(spec, data)
     expect(error.val).toEqual(['must be unique'])
   })
 })
