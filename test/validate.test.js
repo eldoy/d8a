@@ -1084,6 +1084,35 @@ describe('validate', () => {
     expect(error.val).toEqual(['minimum length is 2'])
   })
 
+  // Test other with required
+  it.only('should show required before min', async () => {
+    let spec = {
+      val: {
+        min: 2,
+        required: true
+      }
+    }
+    let data = {}
+    let error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['is required'])
+
+    data = { val: 'h' }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['minimum length is 2'])
+
+    data = { val: 'hello' }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = { val: null }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['minimum length is 2'])
+
+    data = { val: new Date() }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['minimum length is 2'])
+  })
+
   // Test multiple error range
   it('should multiple error range', async () => {
     let spec = {
