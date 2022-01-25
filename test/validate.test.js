@@ -1085,7 +1085,7 @@ describe('validate', () => {
   })
 
   // Test other with required
-  it.only('should show required before min', async () => {
+  it('should show required before min', async () => {
     let spec = {
       val: {
         min: 2,
