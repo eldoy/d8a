@@ -745,6 +745,12 @@ describe('validate', () => {
     expect(error).toBeNull()
 
     data = {
+      val: '2022-01-25T08:20:07.144Z'
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {
       val: 'string'
     }
     error = await validate(spec, data, opt)
