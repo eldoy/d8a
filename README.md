@@ -8,7 +8,69 @@ Data validation library.
 npm i d8a
 ```
 
-### Spec
+### Usage
+
+```js
+const d8a = require('d8a')
+
+// Options, defaults shown
+const validator = d8a({
+  // Language used for locales
+  lang: 'en',
+
+  // Mode for validations
+  // Setting to 'strict' will make all fields required
+  mode: 'lax',
+
+  // Custom translate function
+  t: async function(key, ...args) {},
+
+  // Custom locales, example
+  locales: {
+    en: {
+      validation: {
+        unique: 'must be unique'
+      }
+    }
+  }
+})
+
+// Validate
+const result = await validator.validate({}, {})
+
+// Allow
+const result = await validator.allow({}, [])
+
+// Deny
+const result = await validator.deny({}, [])
+```
+
+Read on to learn more about the different functions.
+
+
+### Validate
+
+Run the validator with:
+```js
+let spec = {
+  val: {
+    required: true
+  }
+}
+let data = {
+  val: 'hello'
+}
+
+let error = await d8a().validate(spec, data)
+
+// Returns null if no errors found
+if (error === null) {
+  console.log('No errors')
+}
+
+// Prints: ['is required']) if val is not defined
+console.log(error.val)
+```
 
 These are the built in validations:
 ```js
@@ -50,54 +112,47 @@ These are the built in validations:
 }
 ```
 
-### Validate
+### Allow
+
+The `allow` function lets you whitelist fields on an object:
 
 ```js
-const { validate } = require('d8a')
+const d8a = require('d8a')
 
-let spec = {
-  val: {
-    required: true
-  }
+const obj = {
+  val: 1
 }
-let data = {
-  val: 'hello'
-}
-let opt = {}
-let error = await validate(spec, data, opt)
 
 // Returns null if no errors found
-if (error === null) {
-  console.log('No errors')
-} else {
-  console.log(error.val)
-  // Prints: ['is required']) if val is not defined
-}
+let error = d8a().allow(obj, ['val'])
+
+// Prints: ['is not allowed']) if val is defined
+// Only 'key' and 'name' is allowed
+let error = d8a().allow(obj, ['key', 'name'])
 ```
 
-### Options
-The third parameter to the `validate` function are the options:
+### Deny
+
+The `deny` function lets you blacklist fields on an object:
+
 ```js
-validate({}, {}, {
+const d8a = require('d8a')
 
-  // Language used for locales
-  lang: 'en',
+const obj = {
+  val: 1
+}
 
-  // Custom translate function
-  t: async function(key, ...args) {},
+// Returns null if no errors found, 'key' is not defined
+let error = await d8a().deny(obj, ['key'])
 
-  // Custom locales, example
-  locales: {
-    en: {
-      validation: {
-        unique: 'must be unique'
-      }
-    }
-  }
-})
+// Prints: ['is denied']) if val is defined
+// 'val' is not allowed thus is denied
+let error = d8a().deny(obj, ['val', 'name'])
 ```
 
-### Extension function
+Both `allow` and `deny` works with dot notation.
+
+### Extensions
 You can extend the validations with your own validator functions:
 ```js
 // Write a validator function
@@ -127,7 +182,7 @@ const ext = {
 }
 
 // Pass ext option
-const error = await validate({}, {}, { ext })
+const error = await d8a({ ext }).validate({}, {})
 ```
 
 ### Locales
@@ -188,7 +243,7 @@ function translate(key, ...args) {
 }
 
 let spec = {}, data = {}
-const error = await validate(spec, data, { t: translate })
+const error = await d8a({ t: translate }).validate(spec, data)
 ```
 
 MIT Licensed. Enjoy!

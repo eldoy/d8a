@@ -9,7 +9,7 @@ describe('allow', () => {
     let obj = {
       val: 1
     }
-    let result = await d8a().allow(obj, ['val'])
+    let result = d8a().allow(obj, ['val'])
     expect(result).toBeNull()
   })
 
@@ -18,7 +18,7 @@ describe('allow', () => {
     let obj = {
       val: 1
     }
-    let result = await d8a().allow(obj, ['key'])
+    let result = d8a().allow(obj, ['key'])
     expect(result.key[0]).toBe('is not allowed')
   })
 })

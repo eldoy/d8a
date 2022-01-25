@@ -9,7 +9,7 @@ describe('deny', () => {
     let obj = {
       val: 1
     }
-    let result = await d8a().deny(obj, ['val'])
+    let result = d8a().deny(obj, ['val'])
     expect(result.val[0]).toBe('is denied')
   })
 
@@ -18,7 +18,7 @@ describe('deny', () => {
     let obj = {
       val: 1
     }
-    let result = await d8a().deny(obj, ['key'])
+    let result = d8a().deny(obj, ['key'])
     expect(result).toBeNull()
   })
 })

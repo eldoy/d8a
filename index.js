@@ -40,7 +40,7 @@ module.exports = function(opt = {}) {
 
   const fn = {}
 
-  fn.allow = async function(obj, fields = []) {
+  fn.allow = function(obj, fields = []) {
     for (const field of fields) {
       if (!_.get(obj, field)) {
         add(field, t('allow'))
@@ -49,7 +49,7 @@ module.exports = function(opt = {}) {
     return result()
   }
 
-  fn.deny = async function(obj, fields = []) {
+  fn.deny = function(obj, fields = []) {
     for (const field of fields) {
       if (_.get(obj, field)) {
         add(field, t('deny'))
