@@ -171,6 +171,7 @@ They look like this:
       array: 'must be an array',
       email: 'must be an email',
       url: 'must be a URL',
+      undefined: 'must be undefined',
       match: "must match '%s'"
     }
   }
