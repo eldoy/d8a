@@ -16,7 +16,7 @@
     "jest": "^27.4.7"
   },
   "dependencies": {
-    "extras": "^0.9.0",
+    "extras": "^0.10.4",
     "lodash": "^4.17.21"
   }
 }
