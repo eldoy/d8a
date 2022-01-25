@@ -19,6 +19,11 @@ describe('options', () => {
     result = await validate(spec, data, { lax: true })
     expect(result).toBeNull()
 
+    data = { val: 2 }
+    result = await validate(spec, data, { lax: true })
+    expect(result.val[0]).toBe('must be equal to 1')
+
+    data = {}
     spec = {
       val: {
         required: true
