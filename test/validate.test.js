@@ -1134,7 +1134,7 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
-  // Test multiple error range
+  // Test multiple error
   it('should multiple error', async () => {
     let spec = {
       val: {
