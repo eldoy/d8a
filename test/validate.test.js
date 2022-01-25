@@ -1154,4 +1154,22 @@ describe('validate', () => {
     error = await validate(spec, data, opt)
     expect(error).toBeNull()
   })
+
+  // Test multiple keys
+  it('should multiple errors with multiple keys', async () => {
+    let spec = {
+      name: {
+        required: true,
+        is: 'string'
+      },
+      email: {
+        required: true,
+        is: 'email'
+      }
+    }
+    let data = {}
+    let error = await validate(spec, data, opt)
+    expect(error.name).toEqual(['is required'])
+    expect(error.email).toEqual(['is required'])
+  })
 })
