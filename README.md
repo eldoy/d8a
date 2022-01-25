@@ -83,6 +83,9 @@ validate({}, {}, {
   // Language used for locales
   lang: 'en',
 
+  // 'strict' is the same as 'required: true' for all fields
+  mode: 'lax',
+
   // Custom translate function
   t: async function(key, ...args) {},
 
