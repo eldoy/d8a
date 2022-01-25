@@ -18,6 +18,15 @@ describe('options', () => {
 
     result = await validate(spec, data, { lax: true })
     expect(result).toBeNull()
+
+    spec = {
+      val: {
+        required: true
+      }
+    }
+
+    result = await validate(spec, data, { lax: true })
+    expect(result.val[0]).toBe('is required')
   })
 
   // Test callback extension
