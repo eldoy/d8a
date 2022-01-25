@@ -34,7 +34,29 @@ module.exports = function(opt = {}) {
     _.set(errors, key, list)
   }
 
+  const result = function() {
+    return _.isEmpty(errors) ? null : errors
+  }
+
   const fn = {}
+
+  fn.allow = async function(obj, fields = []) {
+    for (const field of fields) {
+      if (!_.get(obj, field)) {
+        add(field, t('allow'))
+      }
+    }
+    return result()
+  }
+
+  fn.deny = async function(obj, fields = []) {
+    for (const field of fields) {
+      if (_.get(obj, field)) {
+        add(field, t('deny'))
+      }
+    }
+    return result()
+  }
 
   fn.validate = async function(spec, data) {
     if (!_.isPlainObject(spec)) spec = { val: spec }
@@ -121,7 +143,7 @@ module.exports = function(opt = {}) {
         })
       }
     }
-    return _.isEmpty(errors) ? null : errors
+    return result()
   }
 
   return fn
