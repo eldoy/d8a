@@ -4,6 +4,22 @@ const d8a = require('../index.js')
 
 describe('options', () => {
 
+  // Test strict mode option
+  it('should support strict mode', async () => {
+    let spec = {
+      val: {
+        eq: 1
+      }
+    }
+    let data = { key: 'string' }
+
+    let result = await d8a().validate(spec, data)
+    expect(result).toBeNull()
+
+    result = await d8a({ mode: 'strict' }).validate(spec, data)
+    expect(result.val[0]).toBe('must be equal to 1')
+  })
+
   // Test callback extension
   it('should support callback extension', async () => {
     let spec = {

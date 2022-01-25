@@ -14,7 +14,7 @@ function equal(want, got) {
 }
 
 module.exports = function(opt = {}) {
-  const { lang = 'en', ext = {}} = opt
+  const { lang = 'en', ext = {}, mode = 'lax' } = opt
   for (const x in ext) {
     types[x] = ext[x].type || 'any'
   }
@@ -79,7 +79,7 @@ module.exports = function(opt = {}) {
         want = await want(got, opt)
       }
 
-      if (_.isUndefined(got)) {
+      if (mode != 'strict' && _.isUndefined(got)) {
         if (type == 'required' && want === true) {
           add(field, t(type))
         }
