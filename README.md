@@ -81,10 +81,12 @@ The third parameter to the `validate` function are the options:
 validate({}, {}, {
 
   // Language used for locales
+  // default is 'en' (English)
   lang: 'en',
 
-  // 'strict' is the same as 'required: true' for all fields
-  mode: 'lax',
+  // Skip the validation if the value is undefined
+  // default is false
+  lax: false,
 
   // Custom translate function
   t: async function(key, ...args) {},

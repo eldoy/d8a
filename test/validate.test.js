@@ -22,6 +22,19 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
+  // Test missing field
+  it('should validate against missing field', async () => {
+    let spec = {
+      val: {
+        eq: 1
+      }
+    }
+    let data = { key: 'string' }
+
+    let result = await validate(spec, data)
+    expect(result.val[0]).toBe('must be equal to 1')
+  })
+
   // Test required: function
   it('should require a value to be set as a function', async () => {
     let spec = {

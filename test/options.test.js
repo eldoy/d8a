@@ -4,8 +4,8 @@ const { validate, locales } = require('../index.js')
 
 describe('options', () => {
 
-  // Test strict mode option
-  it('should support strict mode', async () => {
+  // Test lax option
+  it('should not process undefined if lax', async () => {
     let spec = {
       val: {
         eq: 1
@@ -14,10 +14,10 @@ describe('options', () => {
     let data = { key: 'string' }
 
     let result = await validate(spec, data)
-    expect(result).toBeNull()
-
-    result = await validate(spec, data, { mode: 'strict' })
     expect(result.val[0]).toBe('must be equal to 1')
+
+    result = await validate(spec, data, { lax: true })
+    expect(result).toBeNull()
   })
 
   // Test callback extension
