@@ -1172,4 +1172,33 @@ describe('validate', () => {
     expect(error.name).toEqual(['is required'])
     expect(error.email).toEqual(['is required'])
   })
+
+  // Test custom error messages
+  it('should work with custom error messages', async () => {
+    let spec = {
+      name: {
+        required: {
+          val: true,
+          message: 'has'
+        }
+      },
+      email: {
+        is: {
+          val: 'email',
+          message: 'must be emaily'
+        }
+      },
+      street: {
+        min: {
+          val: 5,
+          message: 'must be five'
+        }
+      }
+    }
+    let data = {}
+    let error = await validate(spec, data, opt)
+    expect(error.name).toEqual(['has'])
+    expect(error.email).toEqual(['must be emaily'])
+    expect(error.street).toEqual(['must be five'])
+  })
 })
