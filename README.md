@@ -198,4 +198,17 @@ let spec = {}, data = {}
 const error = await validate(spec, data, { t: translate })
 ```
 
+If you need custom error messages for a certain field, you can do it by adding an object as value that looks like this:
+
+```js
+const spec = {
+  email: {
+    required: {
+      val: true,
+      message: 'must be custom'
+    }
+  }
+}
+```
+
 MIT Licensed. Enjoy!
