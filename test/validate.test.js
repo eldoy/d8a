@@ -291,6 +291,25 @@ describe('validate', () => {
     }
     error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be one of 5, 6'])
+
+    // Support array
+    data = {
+      val: [5, 6]
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {
+      val: [5, 6, 7]
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be one of 5, 6'])
+
+    data = {
+      val: []
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
   })
 
   // Test nin
@@ -317,6 +336,31 @@ describe('validate', () => {
     }
     error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must not be one of 5, 6'])
+
+    // Support array
+    data = {
+      val: [5, 6]
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must not be one of 5, 6'])
+
+    data = {
+      val: [5, 6, 7]
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must not be one of 5, 6'])
+
+    data = {
+      val: [7, 8]
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {
+      val: []
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
   })
 
   // Test match: /regex/
