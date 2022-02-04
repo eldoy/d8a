@@ -527,6 +527,44 @@ describe('validate', () => {
     }
     error = await validate(spec, data, opt)
     expect(error).toBeNull()
+
+    // Support array
+    data = {
+      val: []
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['length must be 5'])
+
+    data = {
+      val: [1, 2, 3]
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['length must be 5'])
+
+    data = {
+      val: [1, 2, 3, 4, 5]
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    // Support object
+    data = {
+      val: {}
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['length must be 5'])
+
+    data = {
+      val: { a: 1, b: 2, c: 3 }
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['length must be 5'])
+
+    data = {
+      val: { a: 1, b: 2, c: 3, d: 4, e: 5 }
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
   })
 
   // Test min
