@@ -312,28 +312,28 @@ describe('validate', () => {
     expect(error).toBeNull()
 
     // Support object
-    // spec = {
-    //   val: {
-    //     in: ['a', 'b']
-    //   }
-    // }
-    // data = {
-    //   val: { a: 5, b: 6 }
-    // }
-    // error = await validate(spec, data, opt)
-    // expect(error).toBeNull()
+    spec = {
+      val: {
+        in: ['a', 'b']
+      }
+    }
+    data = {
+      val: { a: 5, b: 6 }
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
 
-    // data = {
-    //   val: { a: 5, b: 6, c: 7 }
-    // }
-    // error = await validate(spec, data, opt)
-    // expect(error.val).toEqual(['must be one of a, b'])
+    data = {
+      val: { c: 7 }
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be one of a, b'])
 
-    // data = {
-    //   val: {}
-    // }
-    // error = await validate(spec, data, opt)
-    // expect(error).toBeNull()
+    data = {
+      val: {}
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
   })
 
   // Test nin
@@ -382,6 +382,30 @@ describe('validate', () => {
 
     data = {
       val: []
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    // Support object
+    spec = {
+      val: {
+        nin: ['a', 'b']
+      }
+    }
+    data = {
+      val: { a: 5, b: 6 }
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must not be one of a, b'])
+
+    data = {
+      val: { c: 7 }
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {
+      val: {}
     }
     error = await validate(spec, data, opt)
     expect(error).toBeNull()
