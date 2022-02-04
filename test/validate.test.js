@@ -1403,19 +1403,19 @@ describe('validate', () => {
     let spec = {
       name: {
         required: {
-          val: true,
+          $val: true,
           message: 'has'
         }
       },
       email: {
         is: {
-          val: 'email',
+          $val: 'email',
           message: 'must be emaily'
         }
       },
       street: {
         min: {
-          val: 5,
+          $val: 5,
           message: 'must be five'
         }
       }
