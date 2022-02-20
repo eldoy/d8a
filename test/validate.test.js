@@ -1426,4 +1426,57 @@ describe('validate', () => {
     expect(error.email).toEqual(['must be emaily'])
     expect(error.street).toEqual(['must be five'])
   })
+
+  // Test ignore values
+  it('should ignore values', async () => {
+    let spec = {
+      name: {
+        min: 3,
+        ignore: ''
+      }
+    }
+    let data = {}
+    let error = await validate(spec, data, opt)
+    expect(error.name).toEqual(['minimum length is 3'])
+
+    spec = {
+      name: {
+        ignore: '',
+        min: 3
+      }
+    }
+    data = {}
+    error = await validate(spec, data, opt)
+    expect(error.name).toEqual(['minimum length is 3'])
+
+    data = {
+      name: ''
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    spec = {
+      name: {
+        min: 3,
+        eq: 'bye',
+        ignore: 'hello'
+      }
+    }
+    data = {
+      name: 'hello'
+    }
+    error = await validate(spec, data, opt)
+    expect(error.name).toEqual(['must be equal to bye'])
+
+    spec = {
+      name: {
+        min: 3,
+        ignore: 'hello',
+        eq: 'bye'
+      }
+    }
+
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+  })
 })
