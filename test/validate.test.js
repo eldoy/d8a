@@ -760,19 +760,19 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be true or false'])
+    expect(error.val).toEqual(['must be boolean'])
 
     data = {
       val: 5
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be true or false'])
+    expect(error.val).toEqual(['must be boolean'])
 
     data = {
       val: 'string'
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be true or false'])
+    expect(error.val).toEqual(['must be boolean'])
 
     data = {
       val: true
@@ -798,13 +798,13 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a string'])
+    expect(error.val).toEqual(['must be string'])
 
     data = {
       val: 5
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a string'])
+    expect(error.val).toEqual(['must be string'])
 
     data = {
       val: 'string'
@@ -816,13 +816,13 @@ describe('validate', () => {
       val: true
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a string'])
+    expect(error.val).toEqual(['must be string'])
 
     data = {
       val: false
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a string'])
+    expect(error.val).toEqual(['must be string'])
   })
 
   // Test is: number
@@ -836,7 +836,7 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a number'])
+    expect(error.val).toEqual(['must be number'])
 
     data = {
       val: 5
@@ -854,23 +854,23 @@ describe('validate', () => {
       val: 'string'
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a number'])
+    expect(error.val).toEqual(['must be number'])
 
     data = {
       val: true
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a number'])
+    expect(error.val).toEqual(['must be number'])
 
     data = {
       val: false
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a number'])
+    expect(error.val).toEqual(['must be number'])
   })
 
   // Test is: integer
-  it('should be an integer', async () => {
+  it('should be integer', async () => {
     let spec = {
       val: {
         is: 'integer'
@@ -880,7 +880,7 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an integer'])
+    expect(error.val).toEqual(['must be integer'])
 
     data = {
       val: 5
@@ -892,25 +892,25 @@ describe('validate', () => {
       val: 5.3
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an integer'])
+    expect(error.val).toEqual(['must be integer'])
 
     data = {
       val: 'string'
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an integer'])
+    expect(error.val).toEqual(['must be integer'])
 
     data = {
       val: true
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an integer'])
+    expect(error.val).toEqual(['must be integer'])
 
     data = {
       val: false
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an integer'])
+    expect(error.val).toEqual(['must be integer'])
   })
 
   // Test is: decimal
@@ -924,13 +924,13 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a decimal'])
+    expect(error.val).toEqual(['must be decimal'])
 
     data = {
       val: 5
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a decimal'])
+    expect(error.val).toEqual(['must be decimal'])
 
     data = {
       val: 5.3
@@ -942,19 +942,19 @@ describe('validate', () => {
       val: 'string'
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a decimal'])
+    expect(error.val).toEqual(['must be decimal'])
 
     data = {
       val: true
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a decimal'])
+    expect(error.val).toEqual(['must be decimal'])
 
     data = {
       val: false
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a decimal'])
+    expect(error.val).toEqual(['must be decimal'])
   })
 
   // Test is: date
@@ -968,13 +968,13 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a date'])
+    expect(error.val).toEqual(['must be date'])
 
     data = {
       val: 5
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a date'])
+    expect(error.val).toEqual(['must be date'])
 
     data = {
       val: new Date()
@@ -992,19 +992,19 @@ describe('validate', () => {
       val: 'string'
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a date'])
+    expect(error.val).toEqual(['must be date'])
 
     data = {
       val: true
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a date'])
+    expect(error.val).toEqual(['must be date'])
 
     data = {
       val: false
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a date'])
+    expect(error.val).toEqual(['must be date'])
   })
 
   // Test is: id
@@ -1018,25 +1018,25 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an id'])
+    expect(error.val).toEqual(['must be id'])
 
     data = {
       val: 5
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an id'])
+    expect(error.val).toEqual(['must be id'])
 
     data = {
       val: new Date()
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an id'])
+    expect(error.val).toEqual(['must be id'])
 
     data = {
       val: 'string'
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an id'])
+    expect(error.val).toEqual(['must be id'])
 
     data = {
       val: '507f1f77bcf86cd799439011'
@@ -1062,25 +1062,25 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an object'])
+    expect(error.val).toEqual(['must be object'])
 
     data = {
       val: 5
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an object'])
+    expect(error.val).toEqual(['must be object'])
 
     data = {
       val: new Date()
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an object'])
+    expect(error.val).toEqual(['must be object'])
 
     data = {
       val: 'string'
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an object'])
+    expect(error.val).toEqual(['must be object'])
 
     data = {
       val: {}
@@ -1100,30 +1100,30 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an array'])
+    expect(error.val).toEqual(['must be array'])
 
     data = {
       val: 5
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an array'])
+    expect(error.val).toEqual(['must be array'])
 
     data = {
       val: new Date()
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an array'])
+    expect(error.val).toEqual(['must be array'])
 
     data = {
       val: 'string'
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an array'])
+    expect(error.val).toEqual(['must be array'])
     data = {
       val: {}
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an array'])
+    expect(error.val).toEqual(['must be array'])
 
     data = {
       val: []
@@ -1143,30 +1143,30 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an email'])
+    expect(error.val).toEqual(['must be email'])
 
     data = {
       val: 5
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an email'])
+    expect(error.val).toEqual(['must be email'])
 
     data = {
       val: new Date()
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an email'])
+    expect(error.val).toEqual(['must be email'])
 
     data = {
       val: 'string'
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an email'])
+    expect(error.val).toEqual(['must be email'])
     data = {
       val: {}
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an email'])
+    expect(error.val).toEqual(['must be email'])
 
     data = {
       val: 'mail@example.com'
@@ -1186,30 +1186,30 @@ describe('validate', () => {
       val: null
     }
     let error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a URL'])
+    expect(error.val).toEqual(['must be URL'])
 
     data = {
       val: 5
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a URL'])
+    expect(error.val).toEqual(['must be URL'])
 
     data = {
       val: new Date()
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a URL'])
+    expect(error.val).toEqual(['must be URL'])
 
     data = {
       val: 'string'
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a URL'])
+    expect(error.val).toEqual(['must be URL'])
     data = {
       val: {}
     }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be a URL'])
+    expect(error.val).toEqual(['must be URL'])
 
     data = {
       val: 'http://example.com'
@@ -1399,7 +1399,7 @@ describe('validate', () => {
     }
     let data = { val: 'string' }
     error = await validate(spec, data, opt)
-    expect(error.val).toEqual(['must be an integer', 'must be equal to 5'])
+    expect(error.val).toEqual(['must be integer', 'must be equal to 5'])
 
     data = { val: 6 }
     error = await validate(spec, data, opt)
