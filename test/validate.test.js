@@ -1248,6 +1248,38 @@ describe('validate', () => {
     expect(error.val).toEqual(['must be undefined'])
   })
 
+  // Test is multiple types
+  it('should support multiple types', async () => {
+    let spec = {
+      val: {
+        is: ['integer', 'string']
+      }
+    }
+    let data = {
+      val: 1
+    }
+    let error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {
+      val: 'hello'
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {
+      val: null
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be integer, string'])
+
+    data = {
+      val: true
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be integer, string'])
+  })
+
   // Test isnt
   it('should be isnt', async () => {
     let spec = {
