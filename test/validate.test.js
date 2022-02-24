@@ -1457,12 +1457,12 @@ describe('validate', () => {
     expect(error.street).toEqual(['must be five'])
   })
 
-  // Test ignore values
-  it('should ignore values', async () => {
+  // Test skip values
+  it('should skip values', async () => {
     let spec = {
       name: {
         min: 3,
-        ignore: ''
+        skip: ''
       }
     }
     let data = {}
@@ -1471,7 +1471,7 @@ describe('validate', () => {
 
     spec = {
       name: {
-        ignore: '',
+        skip: '',
         min: 3
       }
     }
@@ -1489,7 +1489,7 @@ describe('validate', () => {
       name: {
         min: 3,
         eq: 'bye',
-        ignore: 'hello'
+        skip: 'hello'
       }
     }
     data = {
@@ -1501,7 +1501,7 @@ describe('validate', () => {
     spec = {
       name: {
         min: 3,
-        ignore: 'hello',
+        skip: 'hello',
         eq: 'bye'
       }
     }
