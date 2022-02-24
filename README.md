@@ -175,7 +175,8 @@ They look like this:
       array: 'array',
       email: 'email',
       url: 'URL',
-      undefined: 'undefined'
+      undefined: 'undefined',
+      null: 'null'
     }
   }
 }
