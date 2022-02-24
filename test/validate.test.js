@@ -1248,6 +1248,30 @@ describe('validate', () => {
     expect(error.val).toEqual(['must be undefined'])
   })
 
+  // Test is: null
+  it('should be null', async () => {
+    let spec = {
+      val: {
+        is: 'null'
+      }
+    }
+    let data = {
+      val: null
+    }
+    let error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {}
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {
+      val: 1
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be null'])
+  })
+
   // Test is multiple types
   it('should support multiple types', async () => {
     let spec = {
