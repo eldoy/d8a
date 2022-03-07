@@ -85,4 +85,21 @@ describe('options', () => {
     error = await validate(spec, data, { ext, locales })
     expect(error.val).toEqual(['must be unique'])
   })
+
+  // Test opt params
+  it('should mutate opt params', async () => {
+    let spec = {
+      val: {
+        matcher: async function(val, $) {
+          $.hello = 'hi'
+        }
+      }
+    }
+    let data = { val: 'string' }
+    const params = {}
+    let result = await validate(spec, data, { params })
+
+    expect(result).toBeNull()
+    expect(params.hello).toBe('hi')
+  })
 })
