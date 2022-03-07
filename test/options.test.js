@@ -96,10 +96,10 @@ describe('options', () => {
       }
     }
     let data = { val: 'string' }
-    const params = {}
-    let result = await validate(spec, data, { params })
+    const $ = {}
+    let result = await validate(spec, data, { $ })
 
     expect(result).toBeNull()
-    expect(params.hello).toBe('hi')
+    expect($.hello).toBe('hi')
   })
 })
