@@ -214,7 +214,7 @@ If you need custom error messages for a certain field, you can do it by adding a
 const spec = {
   email: {
     required: {
-      val: true,
+      $val: true,
       message: 'must be custom'
     }
   }
