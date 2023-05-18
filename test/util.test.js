@@ -3,7 +3,6 @@ const { util } = require('../index.js')
 /** Testing util */
 
 describe('util', () => {
-
   // Test sort object single key
   it('should sort object with single key', async () => {
     let obj = {

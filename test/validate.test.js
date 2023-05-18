@@ -5,7 +5,6 @@ const opt = {}
 /** Testing validate functions */
 
 describe('validate', () => {
-
   // Test required: true
   it('should require a value to be set', async () => {
     let spec = {
@@ -39,7 +38,7 @@ describe('validate', () => {
   it('should require a value to be set as a function', async () => {
     let spec = {
       val: {
-        required: async function(val, opt) {
+        required: async function (val, opt) {
           return true
         }
       }
@@ -459,7 +458,7 @@ describe('validate', () => {
   it('should use a matcher function', async () => {
     let spec = {
       val: {
-        matcher: async function(val) {
+        matcher: async function (val) {
           if (val === 5) {
             return 'can not be 5'
           }

@@ -3,7 +3,6 @@ const { validate, locales } = require('../index.js')
 /** Testing options */
 
 describe('options', () => {
-
   // Test lax option
   it('should not process undefined if lax', async () => {
     let spec = {
@@ -46,7 +45,7 @@ describe('options', () => {
     const ext = {
       unique: {
         type: 'bool',
-        fn: async function({ field, add, t }) {
+        fn: async function ({ field, add, t }) {
           add(field, 'must be unique')
         }
       }
@@ -68,7 +67,7 @@ describe('options', () => {
     const ext = {
       unique: {
         type: 'bool',
-        fn: async function({ field, add, t }) {
+        fn: async function ({ field, add, t }) {
           add(field, t('unique'))
         }
       }
@@ -90,7 +89,7 @@ describe('options', () => {
   it('should mutate opt params', async () => {
     let spec = {
       val: {
-        matcher: async function(val, $) {
+        matcher: async function (val, $) {
           $.hello = 'hi'
         }
       }
