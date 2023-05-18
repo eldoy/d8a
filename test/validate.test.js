@@ -1174,6 +1174,55 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
+  // Test is: domain
+  it('should be domain', async () => {
+    let spec = {
+      val: {
+        is: 'domain'
+      }
+    }
+    let data = {
+      val: null
+    }
+    let error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be domain'])
+
+    data = {
+      val: 5
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be domain'])
+
+    data = {
+      val: new Date()
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be domain'])
+
+    data = {
+      val: 'string'
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be domain'])
+    data = {
+      val: {}
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be domain'])
+
+    data = {
+      val: 'https://example.com'
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be domain'])
+
+    data = {
+      val: 'example.com'
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+  })
+
   // Test is: url
   it('should be url', async () => {
     let spec = {
