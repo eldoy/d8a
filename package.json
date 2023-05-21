@@ -1,6 +1,6 @@
 {
   "name": "d8a",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "description": "Data validation library",
   "main": "index.js",
   "scripts": {
