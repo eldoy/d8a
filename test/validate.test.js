@@ -1223,6 +1223,55 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
+  // Test is: slug
+  it('should be slug', async () => {
+    let spec = {
+      val: {
+        is: 'slug'
+      }
+    }
+    let data = {
+      val: null
+    }
+    let error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be slug'])
+
+    data = {
+      val: 5
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be slug'])
+
+    data = {
+      val: new Date()
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be slug'])
+
+    data = {
+      val: '+string'
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be slug'])
+    data = {
+      val: {}
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be slug'])
+
+    data = {
+      val: 'https://example.com'
+    }
+    error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['must be slug'])
+
+    data = {
+      val: 'example-com'
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+  })
+
   // Test is: url
   it('should be url', async () => {
     let spec = {
