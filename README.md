@@ -46,6 +46,8 @@ These are the built in validations:
     is: 'array',    // Must an array
     is: 'email',    // Must be an email address
     is: 'url'       // Must be a URL
+    is: 'slug'      // Must be a slug
+    is: 'domain'    // Must be a domain
     is: 'undefined' // Must be undefined
     is: 'null'      // Must be null
 
