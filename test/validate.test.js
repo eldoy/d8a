@@ -483,6 +483,34 @@ describe('validate', () => {
     expect(error).toBeNull()
   })
 
+  it('should accept array from matcher function', async () => {
+    let spec = {
+      val: {
+        matcher: async function (val) {
+          if (val === 5) {
+            return ['can not be 5', 'should not be 5']
+          }
+        }
+      }
+    }
+    let data = {
+      val: 5
+    }
+    let error = await validate(spec, data, opt)
+    expect(error.val).toEqual(['can not be 5', 'should not be 5'])
+
+    data = {
+      val: 4
+    }
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+
+    data = {}
+
+    error = await validate(spec, data, opt)
+    expect(error).toBeNull()
+  })
+
   // Test length
   it('should have a length', async () => {
     let spec = {
