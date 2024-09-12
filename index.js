@@ -1,7 +1,7 @@
-const locales = require('./lib/locales.js')
-const matchers = require('./lib/matchers.js')
-const types = require('./lib/types.js')
-const util = require('./lib/util.js')
-const validate = require('./lib/validate.js')
+var locales = require('./lib/locales.js')
+var matchers = require('./lib/matchers.js')
+var types = require('./lib/types.js')
+var util = require('./lib/util.js')
+var validate = require('./lib/validate.js')
 
 module.exports = { locales, matchers, types, util, validate }

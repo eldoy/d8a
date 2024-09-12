@@ -1,18 +1,16 @@
-const { validate, locales } = require('../index.js')
-
-/** Testing options */
+var { validate, locales } = require('../index.js')
 
 describe('options', () => {
   // Test lax option
   it('should not process undefined if lax', async () => {
-    let spec = {
+    var spec = {
       val: {
         eq: 1
       }
     }
-    let data = { key: 'string' }
+    var data = { key: 'string' }
 
-    let result = await validate(spec, data)
+    var result = await validate(spec, data)
     expect(result.val).toEqual(['must be equal to 1'])
 
     result = await validate(spec, data, { lax: true })
@@ -35,14 +33,14 @@ describe('options', () => {
 
   // Test callback extension
   it('should support callback extension', async () => {
-    let spec = {
+    var spec = {
       val: {
         unique: true
       }
     }
-    let data = { val: 'string' }
+    var data = { val: 'string' }
 
-    const ext = {
+    var ext = {
       unique: {
         type: 'bool',
         fn: async function ({ field, add, t }) {
@@ -57,14 +55,14 @@ describe('options', () => {
 
   // Test extension with locales
   it('should support extension with locales', async () => {
-    let spec = {
+    var spec = {
       val: {
         unique: true
       }
     }
-    let data = { val: 'string' }
+    var data = { val: 'string' }
 
-    const ext = {
+    var ext = {
       unique: {
         type: 'bool',
         fn: async function ({ field, add, t }) {
@@ -73,7 +71,7 @@ describe('options', () => {
       }
     }
 
-    const locales = {
+    var locales = {
       en: {
         validation: {
           unique: 'must be unique'
@@ -87,16 +85,16 @@ describe('options', () => {
 
   // Test opt params
   it('should mutate opt params', async () => {
-    let spec = {
+    var spec = {
       val: {
         matcher: async function (val, $) {
           $.hello = 'hi'
         }
       }
     }
-    let data = { val: 'string' }
-    const $ = {}
-    let result = await validate(spec, data, { $ })
+    var data = { val: 'string' }
+    var $ = {}
+    var result = await validate(spec, data, { $ })
 
     expect(result).toBeNull()
     expect($.hello).toBe('hi')

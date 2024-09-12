@@ -63,18 +63,18 @@ These are the built in validations:
 ### Validate
 
 ```js
-const { validate } = require('d8a')
+var { validate } = require('d8a')
 
-let spec = {
+var spec = {
   val: {
     required: true
   }
 }
-let data = {
+var data = {
   val: 'hello'
 }
-let opt = {}
-let error = await validate(spec, data, opt)
+var opt = {}
+var error = await validate(spec, data, opt)
 
 // Returns null if no errors found
 if (error === null) {
@@ -134,7 +134,7 @@ async function unique({
 }
 
 // Create ext object for option
-const ext = {
+var ext = {
   unique: {
     type: 'bool', // The accepted value type for this function
     fn: unique
@@ -142,14 +142,14 @@ const ext = {
 }
 
 // Pass ext option
-const error = await validate({}, {}, { ext })
+var error = await validate({}, {}, { ext })
 ```
 
 ### Locales
 The default locales are found here:
 
 ```js
-const { locales } = require('d8a')
+var { locales } = require('d8a')
 ```
 
 They look like this:
@@ -194,7 +194,7 @@ They look like this:
 You can add your own locales and translation function like this:
 
 ```js
-const myLocales = {
+var myLocales = {
   en: {
     validation: {
       required: 'must be included'
@@ -206,14 +206,14 @@ function translate(key, ...args) {
   return myLocales[key] || key
 }
 
-let spec = {}, data = {}
-const error = await validate(spec, data, { t: translate })
+var spec = {}, data = {}
+var error = await validate(spec, data, { t: translate })
 ```
 
 If you need custom error messages for a certain field, you can do it by adding an object as value that looks like this:
 
 ```js
-const spec = {
+var spec = {
   email: {
     required: {
       $val: true,

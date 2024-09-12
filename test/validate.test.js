@@ -1,19 +1,17 @@
-const { validate, locales } = require('../index.js')
+var { validate, locales } = require('../index.js')
 
-const opt = {}
-
-/** Testing validate functions */
+var opt = {}
 
 describe('validate', () => {
   // Test required: true
   it('should require a value to be set', async () => {
-    let spec = {
+    var spec = {
       val: {
         required: true
       }
     }
-    let data = {}
-    let error = await validate(spec, data, opt)
+    var data = {}
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['is required'])
 
     data = { val: 'hello' }
@@ -23,28 +21,28 @@ describe('validate', () => {
 
   // Test missing field
   it('should validate against missing field', async () => {
-    let spec = {
+    var spec = {
       val: {
         eq: 1
       }
     }
-    let data = { key: 'string' }
+    var data = { key: 'string' }
 
-    let result = await validate(spec, data)
+    var result = await validate(spec, data)
     expect(result.val[0]).toBe('must be equal to 1')
   })
 
   // Test required: function
   it('should require a value to be set as a function', async () => {
-    let spec = {
+    var spec = {
       val: {
         required: async function (val, opt) {
           return true
         }
       }
     }
-    let data = {}
-    let error = await validate(spec, data, opt)
+    var data = {}
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['is required'])
 
     data = { val: 'hello' }
@@ -54,15 +52,15 @@ describe('validate', () => {
 
   // Test eq
   it('should be equal to x', async () => {
-    let spec = {
+    var spec = {
       val: {
         eq: 6
       }
     }
-    let data = {
+    var data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be equal to 6'])
 
     data = {
@@ -74,13 +72,13 @@ describe('validate', () => {
 
   // Test eq as default
   it('should have eq as default', async () => {
-    let spec = {
+    var spec = {
       val: 6
     }
-    let data = {
+    var data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be equal to 6'])
 
     data = {
@@ -92,7 +90,7 @@ describe('validate', () => {
 
   // Test eq for objects
   it('should do eq for objects', async () => {
-    let spec = {
+    var spec = {
       val: { a: 1, b: { c: 2 } }
     }
 
@@ -105,7 +103,7 @@ describe('validate', () => {
 
   // Test eq for arrays
   it('should do eq for arrays', async () => {
-    let spec = {
+    var spec = {
       val: [1, 2, 3]
     }
 
@@ -118,10 +116,10 @@ describe('validate', () => {
 
   // Test eq for integers
   it('should do eq for arrays', async () => {
-    let spec = 1
+    var spec = 1
     data = 2
 
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be equal to 1'])
 
     data = 1
@@ -132,15 +130,15 @@ describe('validate', () => {
 
   // Test ne
   it('should not be equal to x', async () => {
-    let spec = {
+    var spec = {
       val: {
         ne: 6
       }
     }
-    let data = {
+    var data = {
       val: 6
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must not be equal to 6'])
 
     data = {
@@ -152,15 +150,15 @@ describe('validate', () => {
 
   // Test gt
   it('should be greater than x', async () => {
-    let spec = {
+    var spec = {
       val: {
         gt: 4
       }
     }
-    let data = {
+    var data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be greater than 4'])
 
     data = {
@@ -178,15 +176,15 @@ describe('validate', () => {
 
   // Test lt
   it('should be less than x', async () => {
-    let spec = {
+    var spec = {
       val: {
         lt: 3
       }
     }
-    let data = {
+    var data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be less than 3'])
 
     data = {
@@ -204,15 +202,15 @@ describe('validate', () => {
 
   // Test gte
   it('should be greater than or equal to x', async () => {
-    let spec = {
+    var spec = {
       val: {
         gte: 3
       }
     }
-    let data = {
+    var data = {
       val: 2
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be greater than or equal to 3'])
 
     data = {
@@ -236,15 +234,15 @@ describe('validate', () => {
 
   // Test lte
   it('should be less than or equal to x', async () => {
-    let spec = {
+    var spec = {
       val: {
         lte: 3
       }
     }
-    let data = {
+    var data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be less than or equal to 3'])
 
     data = {
@@ -268,15 +266,15 @@ describe('validate', () => {
 
   // Test in
   it('should error if value is not in array', async () => {
-    let spec = {
+    var spec = {
       val: {
         in: [5, 6]
       }
     }
-    let data = {
+    var data = {
       val: 5
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error).toBeNull()
 
     data = {
@@ -337,15 +335,15 @@ describe('validate', () => {
 
   // Test nin
   it('should error if value is in array', async () => {
-    let spec = {
+    var spec = {
       val: {
         nin: [5, 6]
       }
     }
-    let data = {
+    var data = {
       val: 4
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error).toBeNull()
 
     data = {
@@ -412,15 +410,15 @@ describe('validate', () => {
 
   // Test match: /regex/
   it('should match regex', async () => {
-    let spec = {
+    var spec = {
       val: {
         match: /regex/
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(["must match '/regex/'"])
 
     data = {
@@ -456,7 +454,7 @@ describe('validate', () => {
 
   // Test matcher
   it('should use a matcher function', async () => {
-    let spec = {
+    var spec = {
       val: {
         matcher: async function (val) {
           if (val === 5) {
@@ -465,10 +463,10 @@ describe('validate', () => {
         }
       }
     }
-    let data = {
+    var data = {
       val: 5
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['can not be 5'])
 
     data = {
@@ -484,7 +482,7 @@ describe('validate', () => {
   })
 
   it('should accept array from matcher function', async () => {
-    let spec = {
+    var spec = {
       val: {
         matcher: async function (val) {
           if (val === 5) {
@@ -493,10 +491,10 @@ describe('validate', () => {
         }
       }
     }
-    let data = {
+    var data = {
       val: 5
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['can not be 5', 'should not be 5'])
 
     data = {
@@ -513,16 +511,16 @@ describe('validate', () => {
 
   // Test length
   it('should have a length', async () => {
-    let spec = {
+    var spec = {
       val: {
         length: 5
       }
     }
 
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['length must be 5'])
 
     data = {
@@ -596,16 +594,16 @@ describe('validate', () => {
 
   // Test min
   it('should have a min length', async () => {
-    let spec = {
+    var spec = {
       val: {
         min: 5
       }
     }
 
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['minimum length is 5'])
 
     data = {
@@ -690,15 +688,15 @@ describe('validate', () => {
 
   // Test max
   it('should have a max length', async () => {
-    let spec = {
+    var spec = {
       val: {
         max: 5
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['maximum length is 5'])
 
     data = {
@@ -778,15 +776,15 @@ describe('validate', () => {
 
   // Test is: boolean
   it('should be boolean', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'boolean'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be boolean'])
 
     data = {
@@ -816,15 +814,15 @@ describe('validate', () => {
 
   // Test is: string
   it('should be string', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'string'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be string'])
 
     data = {
@@ -854,15 +852,15 @@ describe('validate', () => {
 
   // Test is: number
   it('should be number', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'number'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be number'])
 
     data = {
@@ -898,15 +896,15 @@ describe('validate', () => {
 
   // Test is: integer
   it('should be integer', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'integer'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be integer'])
 
     data = {
@@ -942,15 +940,15 @@ describe('validate', () => {
 
   // Test is: decimal
   it('should be decimal', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'decimal'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be decimal'])
 
     data = {
@@ -986,15 +984,15 @@ describe('validate', () => {
 
   // Test is: date
   it('should be date', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'date'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be date'])
 
     data = {
@@ -1036,15 +1034,15 @@ describe('validate', () => {
 
   // Test is: id
   it('should be id', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'id'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be id'])
 
     data = {
@@ -1080,15 +1078,15 @@ describe('validate', () => {
 
   // Test is: object
   it('should be object', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'object'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be object'])
 
     data = {
@@ -1118,15 +1116,15 @@ describe('validate', () => {
 
   // Test is: array
   it('should be array', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'array'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be array'])
 
     data = {
@@ -1161,15 +1159,15 @@ describe('validate', () => {
 
   // Test is: email
   it('should be email', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'email'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be email'])
 
     data = {
@@ -1204,15 +1202,15 @@ describe('validate', () => {
 
   // Test is: domain
   it('should be domain', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'domain'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be domain'])
 
     data = {
@@ -1253,15 +1251,15 @@ describe('validate', () => {
 
   // Test is: slug
   it('should be slug', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'slug'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be slug'])
 
     data = {
@@ -1302,15 +1300,15 @@ describe('validate', () => {
 
   // Test is: url
   it('should be url', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'url'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be URL'])
 
     data = {
@@ -1345,15 +1343,15 @@ describe('validate', () => {
 
   // Test is: undefined
   it('should be undefined', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'undefined'
       }
     }
-    let data = {
+    var data = {
       val: undefined
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error).toBeNull()
 
     data = {}
@@ -1375,15 +1373,15 @@ describe('validate', () => {
 
   // Test is: null
   it('should be null', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'null'
       }
     }
-    let data = {
+    var data = {
       val: null
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error).toBeNull()
 
     data = {}
@@ -1399,15 +1397,15 @@ describe('validate', () => {
 
   // Test is multiple types
   it('should support multiple types', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: ['integer', 'string']
       }
     }
-    let data = {
+    var data = {
       val: 1
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error).toBeNull()
 
     data = {
@@ -1431,15 +1429,15 @@ describe('validate', () => {
 
   // Test isnt
   it('should be isnt', async () => {
-    let spec = {
+    var spec = {
       val: {
         isnt: 'undefined'
       }
     }
-    let data = {
+    var data = {
       val: undefined
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must not be undefined'])
 
     data = {}
@@ -1461,28 +1459,28 @@ describe('validate', () => {
 
   // Test deeply nested values
   it('should validate deeply nested values', async () => {
-    let spec = {
+    var spec = {
       'street.name': {
         max: 5
       }
     }
-    let data = {
+    var data = {
       street: {
         name: 'hello!'
       }
     }
-    let error = await validate(spec, data, opt)
+    var error = await validate(spec, data, opt)
     expect(error.street.name).toEqual(['maximum length is 5'])
   })
 
   // Test deeply nested values with array
   it('should validate nested values with array', async () => {
-    let spec = {
+    var spec = {
       'cars.name[0]': {
         eq: 'cart'
       }
     }
-    let data = {
+    var data = {
       cars: {
         name: ['cart']
       }
@@ -1493,14 +1491,14 @@ describe('validate', () => {
 
   // Test required with other
   it('should show either require or min', async () => {
-    let spec = {
+    var spec = {
       val: {
         required: true,
         min: 2
       }
     }
-    let data = {}
-    let error = await validate(spec, data, opt)
+    var data = {}
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['is required'])
 
     data = { val: 'h' }
@@ -1522,14 +1520,14 @@ describe('validate', () => {
 
   // Test other with required
   it('should show required before min', async () => {
-    let spec = {
+    var spec = {
       val: {
         min: 2,
         required: true
       }
     }
-    let data = {}
-    let error = await validate(spec, data, opt)
+    var data = {}
+    var error = await validate(spec, data, opt)
     expect(error.val).toEqual(['is required'])
 
     data = { val: 'h' }
@@ -1551,13 +1549,13 @@ describe('validate', () => {
 
   // Test multiple error range
   it('should multiple error range', async () => {
-    let spec = {
+    var spec = {
       val: {
         gt: 2,
         lt: 5
       }
     }
-    let data = { val: 1 }
+    var data = { val: 1 }
     error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be greater than 2'])
 
@@ -1572,13 +1570,13 @@ describe('validate', () => {
 
   // Test multiple error
   it('should multiple error', async () => {
-    let spec = {
+    var spec = {
       val: {
         is: 'integer',
         eq: 5
       }
     }
-    let data = { val: 'string' }
+    var data = { val: 'string' }
     error = await validate(spec, data, opt)
     expect(error.val).toEqual(['must be integer', 'must be equal to 5'])
 
@@ -1593,7 +1591,7 @@ describe('validate', () => {
 
   // Test multiple keys
   it('should multiple errors with multiple keys', async () => {
-    let spec = {
+    var spec = {
       name: {
         required: true,
         is: 'string'
@@ -1603,15 +1601,15 @@ describe('validate', () => {
         is: 'email'
       }
     }
-    let data = {}
-    let error = await validate(spec, data, opt)
+    var data = {}
+    var error = await validate(spec, data, opt)
     expect(error.name).toEqual(['is required'])
     expect(error.email).toEqual(['is required'])
   })
 
   // Test custom error messages
   it('should work with custom error messages', async () => {
-    let spec = {
+    var spec = {
       name: {
         required: {
           $val: true,
@@ -1631,8 +1629,8 @@ describe('validate', () => {
         }
       }
     }
-    let data = {}
-    let error = await validate(spec, data, opt)
+    var data = {}
+    var error = await validate(spec, data, opt)
     expect(error.name).toEqual(['has'])
     expect(error.email).toEqual(['must be emaily'])
     expect(error.street).toEqual(['must be five'])
@@ -1640,14 +1638,14 @@ describe('validate', () => {
 
   // Test skip values
   it('should skip values', async () => {
-    let spec = {
+    var spec = {
       name: {
         min: 3,
         skip: ''
       }
     }
-    let data = {}
-    let error = await validate(spec, data, opt)
+    var data = {}
+    var error = await validate(spec, data, opt)
     expect(error.name).toEqual(['minimum length is 3'])
 
     spec = {
